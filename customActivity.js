@@ -188,13 +188,19 @@ define(["postmonger"], function (Postmonger) {
     var name = $("#select1").find("option:selected").html();
     var value = getMessage();
 
-    // 'payload' is initialized on 'initActivity' above.
-    // Journey Builder sends an initial payload with defaults
-    // set by this activity's config.json file.  Any property
-    // may be overridden as desired.
     payload.name = name;
 
-    payload["arguments"].execute.inArguments = [{ message: value }];
+    // Update the inArguments to include both the message and the DE fields
+    payload["arguments"].execute.inArguments = [
+      { message: value },
+      { emailAddress: "{{Contact.Attribute.SMS_Journey_Entry.EmailAddress}}" },
+      { phoneNumber: "{{Contact.Attribute.SMS_Journey_Entry.PhoneNumber}}" }
+    ];
+
+    // Add outArguments for the signup date
+    payload["arguments"].execute.outArguments = [
+      { foundSignupDate: "{{Contact.Attribute.SMS_Journey_Entry.FoundSignupDate}}" }
+    ];
 
     payload["metaData"].isConfigured = true;
 
