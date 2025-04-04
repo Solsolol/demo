@@ -31,16 +31,16 @@
   },
   "configurationArguments": {
     "save": {
-      "url": "URI/for/your/activity/save"
+      "url": "https://demosmscustom-3a3ca3cd2daa.herokuapp.com/save"
     },
     "publish": {
-      "url": "URI/for/your/activity/publish"
+      "url": "https://demosmscustom-3a3ca3cd2daa.herokuapp.com/publish"
     },
     "validate": {
-      "url": "URI/for/your/activity/validate"
+      "url": "https://demosmscustom-3a3ca3cd2daa.herokuapp.com/validate"
     },
     "stop": {
-      "url": "URI/for/your/activity/stop"
+      "url": "https://demosmscustom-3a3ca3cd2daa.herokuapp.com/stop"
     }
   },
   "wizardSteps": [
