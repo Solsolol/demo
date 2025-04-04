@@ -24,11 +24,12 @@ define(["postmonger"], function (Postmonger) {
   connection.on("gotoStep", onGotoStep);
 
   function onRender() {
-    // JB will respond the first time 'ready' is called with 'initActivity'
-    connection.trigger("ready");
-
-    connection.trigger("requestTokens");
-    connection.trigger("requestEndpoints");
+    // Ajout d'un timeout pour s'assurer que la connexion est établie
+    setTimeout(function() {
+      connection.trigger("ready");
+      connection.trigger("requestTokens");
+      connection.trigger("requestEndpoints");
+    }, 100);
 
     // Disable the next button if a value isn't selected
     $("#select1").change(function () {
@@ -52,10 +53,14 @@ define(["postmonger"], function (Postmonger) {
   }
 
   function initialize(data) {
+    console.log('Initialization started');  // Debug log
     if (data) {
       payload = data;
     }
 
+    // Force l'affichage de l'étape 1 si rien n'est sélectionné
+    showStep(null, 1);
+    
     var message;
     var hasInArguments = Boolean(
       payload["arguments"] &&
