@@ -26,7 +26,7 @@
           "foundSignupDate": ""
         }
       ],
-      "url": "https://some-endpoint.com/execute"
+      "url": " https://demosmscustom-3a3ca3cd2daa.herokuapp.com/execute"
     }
   },
   "configurationArguments": {
