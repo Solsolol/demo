@@ -31,9 +31,18 @@
       #step1 {
         display: block;
       }
+      .loading {
+        display: none;
+      }
+      .loading.active {
+        display: block;
+        text-align: center;
+        margin: 20px;
+      }
     </style>
   </head>
   <body>
+    <div class="loading" id="loading">Chargement...</div>
     <div id="step1" class="step">
       Select your SMS message:
       <select id="select1">
