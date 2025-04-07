@@ -11,20 +11,17 @@ app.use(express.static(__dirname));
 app.post('/execute', (req, res) => {
   console.log('Execute payload:', req.body);
   
-  // Récupération des données de la requête
-  const { inArguments } = req.body;
-  const emailAddress = inArguments[0].emailAddress;
-  const phoneNumber = inArguments[1].phoneNumber;
-  
-  // Log des données reçues
-  console.log('Email:', emailAddress);
-  console.log('Phone:', phoneNumber);
+  const inArguments = req.body.inArguments;
+  console.log('InArguments:', inArguments);
 
-  // Réponse à SFMC
-  res.status(200).json({
+  // Simuler l'envoi d'un SMS
+  const response = {
     status: 'ok',
-    foundSignupDate: new Date().toISOString()
-  });
+    foundSignupDate: new Date().toISOString(),
+    message: 'SMS would be sent to ' + inArguments[2].phoneNumber
+  };
+
+  res.status(200).json(response);
 });
 
 // Routes pour les autres endpoints
