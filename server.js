@@ -3,28 +3,54 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(__dirname));
+// Middleware pour parser le JSON
 app.use(express.json());
+app.use(express.static(__dirname));
 
-// Ajout des routes pour les endpoints SFMC
+// Route pour l'exécution de l'activité
 app.post('/execute', (req, res) => {
-  res.status(200).json({ success: true });
+  console.log('Execute payload:', req.body);
+  
+  // Récupération des données de la requête
+  const { inArguments } = req.body;
+  const emailAddress = inArguments[0].emailAddress;
+  const phoneNumber = inArguments[1].phoneNumber;
+  
+  // Log des données reçues
+  console.log('Email:', emailAddress);
+  console.log('Phone:', phoneNumber);
+
+  // Réponse à SFMC
+  res.status(200).json({
+    status: 'ok',
+    foundSignupDate: new Date().toISOString()
+  });
 });
 
+// Routes pour les autres endpoints
 app.post('/save', (req, res) => {
-  res.status(200).json({ success: true });
+  console.log('Save payload:', req.body);
+  res.status(200).json({ status: 'ok' });
 });
 
 app.post('/publish', (req, res) => {
-  res.status(200).json({ success: true });
+  console.log('Publish payload:', req.body);
+  res.status(200).json({ status: 'ok' });
 });
 
 app.post('/validate', (req, res) => {
-  res.status(200).json({ success: true });
+  console.log('Validate payload:', req.body);
+  res.status(200).json({ status: 'ok' });
 });
 
 app.post('/stop', (req, res) => {
-  res.status(200).json({ success: true });
+  console.log('Stop payload:', req.body);
+  res.status(200).json({ status: 'ok' });
+});
+
+// Route par défaut
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
